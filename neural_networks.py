@@ -112,39 +112,3 @@ print("Mobile Data")
 mlp_mobile = MLP(x_mobile_train, x_mobile_test, y_mobile_train, y_mobile_test)
 mlp_mobile.mlpClassifier()
 mlp_mobile.mlpClassifierTwo()
-
-""" Airlines Delay """
-airlines_dataset = pd.read_csv('data/airlines_delay.csv')
-airlines_dataset.drop("Flight", axis=1, inplace=True)
-
-# Creating an instance of label Encoder.
-encode_labels = LabelEncoder()
-
-# Using .fit_transform function to fit label
-# encoder and return encoded label
-airline_label = encode_labels.fit_transform(airlines_dataset['Airline'])
-airportFrom_labels = encode_labels.fit_transform(airlines_dataset['AirportFrom'])
-airportTo_labels = encode_labels.fit_transform(airlines_dataset['AirportTo'])
-
-# Appending the array to our dataFrame
-# with column name 'Airline'
-airlines_dataset["Airline"] = airline_label
-
-# Appending the array to our dataFrame
-# with column name 'AirportFrom'
-airlines_dataset["AirportFrom"] = airportFrom_labels
-
-# Appending the array to our dataFrame
-# with column name 'AirportTo'
-airlines_dataset["AirportTo"] = airportTo_labels
-
-x_airlines = airlines_dataset.drop(['Class'], axis=1)
-y_airlines = airlines_dataset['Class']
-
-# split data to train and test sets
-x_airlines_train, x_airlines_test, y_airlines_train, y_airlines_test = train_test_split(x_airlines, y_airlines, test_size=0.30, random_state=42)
-
-print("Airlines Data")
-mlp_airlines = MLP(x_airlines_train, x_airlines_test, y_airlines_train, y_airlines_test)
-mlp_airlines.mlpClassifier()
-mlp_airlines.mlpClassifierTwo()
